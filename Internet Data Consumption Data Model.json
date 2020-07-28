@@ -1,0 +1,147 @@
+{
+  "ModelName": "Internet Data Consumption Data Model",
+  "ModelMetadata": {
+    "Author": "",
+    "DateCreated": "Jul 16, 2020, 11:46 PM",
+    "DateLastModified": "Jul 17, 2020, 12:41 AM",
+    "Description": "",
+    "Version": "1.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "Data_Consumption_Details",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "customerId",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "consumptionDate",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "customerName",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "residenceId",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "residenceName",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "houseNumber",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "consumedData",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "unit",
+          "AttributeType": "S"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "Name",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "residenceId",
+              "AttributeType": "S"
+            },
+            "SortKey": {
+              "AttributeName": "customerName",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "ALL"
+          }
+        },
+        {
+          "IndexName": "Residence",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "residenceId",
+              "AttributeType": "S"
+            },
+            "SortKey": {
+              "AttributeName": "consumptionDate",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "INCLUDE",
+            "NonKeyAttributes": [
+              "residenceName",
+              "consumedData",
+              "unit"
+            ]
+          }
+        }
+      ],
+      "TableData": [
+        {
+          "customerId": {
+            "S": "C0001"
+          },
+          "consumptionDate": {
+            "S": "2020-07-16"
+          },
+          "customerName": {
+            "S": "James"
+          },
+          "residenceId": {
+            "S": "R0001"
+          },
+          "residenceName": {
+            "S": "Rajkamal"
+          },
+          "houseNumber": {
+            "S": "308"
+          },
+          "consumedData": {
+            "N": "5"
+          },
+          "unit": {
+            "S": "GB"
+          }
+        },
+        {
+          "customerId": {
+            "S": "C0001"
+          },
+          "consumptionDate": {
+            "S": "2020-07-17"
+          },
+          "customerName": {
+            "S": "Rajesh"
+          },
+          "residenceId": {
+            "S": "R0001"
+          },
+          "residenceName": {
+            "S": "Rajkamal"
+          },
+          "houseNumber": {
+            "S": "309"
+          },
+          "consumedData": {
+            "N": "9"
+          },
+          "unit": {
+            "S": "GB"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    }
+  ]
+}
